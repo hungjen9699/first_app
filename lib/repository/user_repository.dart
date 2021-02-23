@@ -1,0 +1,48 @@
+import 'package:first_app/objects/userDTO.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:io';
+
+class UserRepository {
+  static final UserRepository _userRepository = UserRepository._internal();
+  factory UserRepository() {
+    return _userRepository;
+  }
+  Future<List<UserDTO>> fetchUsers(String page) async {
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'app-id': '60335d57438ec423a023baef'
+    };
+    var apiPath = Uri.encodeFull(
+        "https://dummyapi.io/data/api/user?limit=10&page=" + page);
+    final response = await http.get(apiPath, headers: requestHeaders);
+    final responseJson = json.decode(utf8.decode(response.bodyBytes));
+    UserGetResult x = UserGetResult.fromJson(responseJson);
+    return x.list;
+  }
+
+  UserGetResult parserListUser(String responseBody) {
+    final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+    return parsed
+        .map<UserGetResult>((json) => UserGetResult.fromJson(json))
+        .toList();
+  }
+
+  UserRepository._internal();
+}
+
+class UserGetResult {
+  final List<UserDTO> list;
+
+  UserGetResult._({
+    this.list,
+  });
+
+  factory UserGetResult.fromJson(Map<String, dynamic> json) {
+    return new UserGetResult._(
+      list: json['data'] != null
+          ? (json['data'] as List).map((i) => UserDTO.fromJson(i)).toList()
+          : null,
+    );
+  }
+}
