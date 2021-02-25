@@ -1,7 +1,6 @@
 import 'package:first_app/objects/userDTO.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:io';
 
 class UserRepository {
   static final UserRepository _userRepository = UserRepository._internal();
@@ -11,20 +10,29 @@ class UserRepository {
   Future<List<UserDTO>> fetchUsers(String page) async {
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
-      'app-id': '60335d57438ec423a023baef'
+      'app-id': '603756f92fc8f323d48d7697'
     };
     var apiPath = Uri.encodeFull(
         "https://dummyapi.io/data/api/user?limit=10&page=" + page);
-    final response = await http.get(apiPath, headers: requestHeaders);
-    final responseJson = json.decode(utf8.decode(response.bodyBytes));
-    UserGetResult x = UserGetResult.fromJson(responseJson);
-    return x.list;
+    try {
+      final response = await http.get(apiPath, headers: requestHeaders);
+      final responseJson = json.decode(
+        utf8.decode(response.bodyBytes),
+      );
+      UserGetResult userGerResult = UserGetResult.fromJson(responseJson);
+      return userGerResult.list;
+    } catch (e) {
+      print(e);
+      return null;
+    }
   }
 
   UserGetResult parserListUser(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
     return parsed
-        .map<UserGetResult>((json) => UserGetResult.fromJson(json))
+        .map<UserGetResult>(
+          (json) => UserGetResult.fromJson(json),
+        )
         .toList();
   }
 
@@ -41,7 +49,11 @@ class UserGetResult {
   factory UserGetResult.fromJson(Map<String, dynamic> json) {
     return new UserGetResult._(
       list: json['data'] != null
-          ? (json['data'] as List).map((i) => UserDTO.fromJson(i)).toList()
+          ? (json['data'] as List)
+              .map(
+                (i) => UserDTO.fromJson(i),
+              )
+              .toList()
           : null,
     );
   }

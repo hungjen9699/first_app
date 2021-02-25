@@ -18,31 +18,40 @@ class GetListUserBloc extends Bloc<GetListUserEvent, GetListUserState> {
     UserRepository _userRepository = new UserRepository();
     if (event is GetMoreUser) {
       yield WaitingForLoad();
-      List<UserDTO> listDTO =
-          await _userRepository.fetchUsers(currentPage.toString());
+      List<UserDTO> listDTO = await _userRepository.fetchUsers(
+        currentPage.toString(),
+      );
       currentPage += 1;
       for (UserDTO dto in listDTO) {
         listUser.add(dto);
       }
-      yield GetMoreUserSuccess();
+      yield* _mapAppStartedToState(
+        filterList(listUser),
+      );
     } else if (event is GetListUser) {
-      List<UserDTO> listDTO =
-          await _userRepository.fetchUsers(currentPage.toString());
+      List<UserDTO> listDTO = await _userRepository.fetchUsers(
+        currentPage.toString(),
+      );
       currentPage += 1;
       for (UserDTO dto in listDTO) {
         listUser.add(dto);
       }
-      yield* _mapAppStartedToState(filterList(listUser));
+      yield* _mapAppStartedToState(
+        filterList(listUser),
+      );
     } else if (event is ResetData) {
       yield GetListUserLoading();
       List<UserDTO> listDTO = await _userRepository.fetchUsers("1");
-      currentPage = 1;
+      currentPage = 2;
       listUser = listDTO;
-      yield ResetListSuccess();
+      yield* _mapAppStartedToState(
+        filterList(listUser),
+      );
     } else if (event is FilterData) {
-      yield GetListUserSuccess();
+      yield* _mapAppStartedToState(
+        filterList(listUser),
+      );
     }
-    listShow = filterList(listUser);
   }
 
   List<UserDTO> filterList(List<UserDTO> list) {
@@ -61,7 +70,7 @@ class GetListUserBloc extends Bloc<GetListUserEvent, GetListUserState> {
 
   Stream<GetListUserState> _mapAppStartedToState(List<UserDTO> listDTO) async* {
     if (listDTO != null) {
-      yield GetListUserSuccess();
+      yield GetListUserSuccess(listDTO);
     } else {
       yield GetListUserError();
     }
