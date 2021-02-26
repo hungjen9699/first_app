@@ -1,4 +1,4 @@
-import 'package:first_app/component/skeleton_user_box.dart';
+import 'package:first_app/clean_architecture/presentation/pages/component/home_screen/skeleton_user_box.dart';
 import 'package:flutter/material.dart';
 
 class LoadingScaffold extends StatefulWidget {

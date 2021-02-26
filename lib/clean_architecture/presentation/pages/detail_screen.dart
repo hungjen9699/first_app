@@ -1,10 +1,9 @@
+import 'package:first_app/clean_architecture/data/userusecase/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:rating_bar/rating_bar.dart';
 
-import 'objects/userDTO.dart';
-
 class DetailScreen extends StatefulWidget {
-  final UserDTO dto;
+  final UserModel dto;
 
   const DetailScreen({Key key, this.dto}) : super(key: key);
   @override
@@ -14,7 +13,6 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreentate extends State<DetailScreen> {
   ScrollController _scrollController = ScrollController();
   double _bottomValue = 0;
-  // var _debouncer = Debouncer(milliseconds: 100);
   @override
   initState() {
     super.initState();
@@ -31,11 +29,6 @@ class _DetailScreentate extends State<DetailScreen> {
             // ignore: missing_return
             onNotification: (scrollNotification) {
               if (scrollNotification is ScrollStartNotification) {
-                // _debouncer.run(() => setState(() {
-                //       _bottomValue = -60;
-                //     }),);
-                print("hgfhg");
-
                 setState(() {
                   _bottomValue = -60;
                 });
@@ -59,23 +52,6 @@ class _DetailScreentate extends State<DetailScreen> {
                   pinned: true,
                   snap: false,
                   expandedHeight: 400,
-                  // bottom: PreferredSize(
-                  //   preferredSize: const Size.fromHeight(0.0),
-                  //   child: Container(
-                  //     child: Text(
-                  //       widget.dto.title +
-                  //           ". " +
-                  //           widget.dto.firstName +
-                  //           " " +
-                  //           widget.dto.lastName,
-                  //       style: TextStyle(
-                  //         color: Colors.black,
-                  //         fontWeight: FontWeight.bold,
-                  //         fontSize: 16,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   flexibleSpace: FlexibleSpaceBar(
                     background: Container(
                       margin: EdgeInsets.only(top: 80),

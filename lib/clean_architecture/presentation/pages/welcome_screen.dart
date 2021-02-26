@@ -1,8 +1,8 @@
-import 'package:first_app/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'component/slider.dart';
+import 'component/welcome_screen/slider.dart';
+import 'home_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override

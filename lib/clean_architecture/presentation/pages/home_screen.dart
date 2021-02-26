@@ -1,12 +1,12 @@
-import 'package:first_app/component/error_scaffold.dart';
-import 'package:first_app/component/loading_scaffold.dart';
+import 'package:first_app/clean_architecture/data/userusecase/models/user_model.dart';
+import 'package:first_app/clean_architecture/presentation/bloc/getlistuser_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'bloc/getlistuser_bloc.dart';
-import 'component/get_data_scaffold.dart';
-import 'objects/userDTO.dart';
+import 'component/home_screen/error_scaffold.dart';
+import 'component/home_screen/get_data_scaffold.dart';
+import 'component/home_screen/loading_scaffold.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<UserDTO> myList = new List<UserDTO>();
+  List<UserModel> myList = new List<UserModel>();
   ScrollController _scrollController = ScrollController();
   GetListUserBloc _getBloc = new GetListUserBloc();
   @override

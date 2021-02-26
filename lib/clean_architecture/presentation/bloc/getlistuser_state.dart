@@ -9,7 +9,7 @@ abstract class GetListUserState extends Equatable {
 class GetListUserLoading extends GetListUserState {}
 
 class GetListUserSuccess extends GetListUserState {
-  final List<UserDTO> listDTO;
+  final List<UserModel> listDTO;
   const GetListUserSuccess(this.listDTO);
   @override
   List<Object> get props => [listDTO];

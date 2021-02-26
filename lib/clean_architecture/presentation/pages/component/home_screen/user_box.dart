@@ -1,11 +1,11 @@
-import 'package:first_app/objects/userDTO.dart';
+import 'package:first_app/clean_architecture/data/userusecase/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:rating_bar/rating_bar.dart';
 
-import '../detail_screen.dart';
+import '../../detail_screen.dart';
 
 class UserBox extends StatefulWidget {
-  final UserDTO dto;
+  final UserModel dto;
   const UserBox({Key key, this.dto}) : super(key: key);
   @override
   _UserBoxState createState() => _UserBoxState();

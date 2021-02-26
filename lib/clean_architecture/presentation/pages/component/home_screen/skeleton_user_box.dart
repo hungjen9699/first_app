@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'load_animation.dart';
+import '../general/load_animation.dart';
 
 class SkeletonUserBox extends StatefulWidget {
   @override
-  _UserBoxState createState() => _UserBoxState();
+  _SkeletonUserBoxState createState() => _SkeletonUserBoxState();
 }
 
-class _UserBoxState extends State<SkeletonUserBox> {
+class _SkeletonUserBoxState extends State<SkeletonUserBox> {
   @override
   void initState() {
     super.initState();

@@ -1,6 +1,6 @@
-import 'package:first_app/bloc/getlistuser_bloc.dart';
-import 'package:first_app/component/skeleton_user_box.dart';
-import 'package:first_app/objects/userDTO.dart';
+import 'package:first_app/clean_architecture/data/userusecase/models/user_model.dart';
+import 'package:first_app/clean_architecture/presentation/bloc/getlistuser_bloc.dart';
+import 'package:first_app/clean_architecture/presentation/pages/component/home_screen/skeleton_user_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +8,7 @@ import 'user_box.dart';
 
 class GetDataScaffold extends StatefulWidget {
   final ScrollController scrollController;
-  final List<UserDTO> myList;
+  final List<UserModel> myList;
   final GetListUserBloc getBloc;
 
   const GetDataScaffold(

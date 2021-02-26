@@ -4,8 +4,10 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
         {
-            "name": "first_app",
+            "name": "first_app_clean_architecture",
+            "program": "lib/clean_architecture/presentation/pages/main.dart",
             "request": "launch",
             "type": "dart"
         }

@@ -1,4 +1,4 @@
-import 'package:first_app/welcome_screen.dart';
+import 'package:first_app/clean_architecture/presentation/pages/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
