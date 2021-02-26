@@ -172,14 +172,14 @@ class _GetDataScaffoldState extends State<GetDataScaffold> {
               child: RefreshIndicator(
                 onRefresh: _resetData,
                 child: GridView.builder(
-                  itemCount: widget.myList.length + 1,
+                  itemCount: widget.myList.length + 2,
                   controller: widget.scrollController,
                   gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: 0.75,
                   ),
                   itemBuilder: (BuildContext context, int index) {
-                    if (index == widget.myList.length) {
+                    if (index >= widget.myList.length) {
                       return SkeletonUserBox();
                     }
                     return UserBox(
